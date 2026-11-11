@@ -1,40 +1,5 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-
-## 모잇 프로토타입
+## 프로토타입
 
 React + TypeScript + Vite로 만든 모임 장소 결정 프로토타입입니다.
 
@@ -44,7 +9,7 @@ pnpm dev
 pnpm build
 ```
 
-카카오맵 JavaScript 키는 `.env`의 `KAKAO_API_KEY` 또는 `VITE_KAKAO_API_KEY`를 사용합니다. 카카오 개발자 콘솔의 해당 JavaScript 키에 실행 도메인(예: `http://localhost:5173`)을 등록해야 합니다. JavaScript 키만 브라우저 번들에 포함되며, REST API 키나 Admin 키를 넣으면 안 됩니다. 키는 커밋하지 않습니다.
+카카오맵은 실제 Kakao Maps JavaScript SDK를 사용합니다. `.env`에 `VITE_KAKAO_MAP_JAVASCRIPT_KEY` (`NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY` 또는 `KAKAO_JAVASCRIPT_KEY`)를 설정한 뒤 개발 서버를 재시작하세요. 카카오 개발자 콘솔의 해당 JavaScript 키에 실행 도메인(예: `http://localhost:5173`)을 등록해야 합니다. `KAKAO_API_KEY`는 REST API용이므로 브라우저에 포함하거나 지도 SDK에 사용하지 않습니다. JavaScript 키만 브라우저 번들에 포함됩니다.
 
 - 카카오 지도: 장소 핀, 혼잡도 영역, 데모 멤버 위치, 확대·축소, 선택 장소 이동
 - GPS: 사용자가 공유 스위치를 켠 경우에만 현재 위치 조회. 지도 클릭으로 핀 조정 가능
@@ -53,7 +18,7 @@ pnpm build
 - 후보지: 추가, 복수 투표·취소, 최다 득표 장소 확정·해제
 - 모바일: 지도·추천·투표 및 스페이스 패널 대응
 
-혼잡도, 기존 멤버 위치, 추천과 이동 시간은 더미 데이터입니다. 서울 실시간 도시데이터 및 실시간 서버는 연결되지 않았습니다. 프로필과 스페이스별 투표·후보지·확정 장소는 localStorage에 저장되며, 다른 브라우저·기기와 동기화되지 않습니다. GPS 위치는 영구 저장하지 않습니다. 초대 링크의 스페이스 ID는 전달되지만, 서버가 없으므로 제목과 멤버는 다른 기기로 전달되지 않습니다. 지도 인증이나 네트워크 연결에 실패하면 안내와 데모 지도를 표시합니다.
+혼잡도, 기존 멤버 위치, 추천과 이동 시간은 더미 데이터입니다. 서울 실시간 도시데이터 및 실시간 서버는 연결되지 않았습니다. 프로필과 스페이스별 투표·후보지·확정 장소는 localStorage에 저장되며, 다른 브라우저·기기와 동기화되지 않습니다. GPS 위치는 영구 저장하지 않습니다. 초대 링크의 스페이스 ID는 전달되지만, 서버가 없으므로 제목과 멤버는 다른 기기로 전달되지 않습니다. 지도 인증이나 네트워크 연결에 실패하면 설정 안내 및 재시도 버튼을 표시합니다. 가상 지도는 사용하지 않습니다.
 
 카카오 지도 공식 가이드: https://apis.map.kakao.com/web/guide/
 
