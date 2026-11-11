@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useGeolocationHook } from "@/hooks/useGeolocationHook";
 import { AddAddressBox } from "@/components/AddAddressBox";
 import seoulBoundary from "@/data/seoul-boundary.json";
+import { API_CLIENT_ADDRESS_SEARCH } from "@/entities/address/api/api.client.address";
 
 const DEFAULT_MIN_ZOOM_LEVEL = 3;
 const DEFAULT_MAX_ZOOM_LEVEL = 12;
@@ -15,6 +16,13 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoad) return;
+
+    // API_CLIENT_ADDRESS_SEARCH("영등포")
+    // .then(rs => {
+    //   console.log("rs", rs)
+    // })
+
+    // console.log(nx, ny)
 
     let disposed = false;
     let initialized = false;
@@ -73,6 +81,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-center items-center w-dvw h-dvh">
+      <AddAddressBox/>
       <div className="w-[80dvw] h-[80dvh]" ref={mapRef} />
     </div>
   );

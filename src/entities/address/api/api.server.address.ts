@@ -8,7 +8,7 @@ export async function API_SERVER_ADDRESS_SEARCH(query : string) {
             }
         }).json<API_SERVER_ADDRESS_SEARCH>();
 
-        return result?.["documents"]
+        return result?.["documents"]?.[0]??null
     }
     catch(err) { 
         console.log(err);

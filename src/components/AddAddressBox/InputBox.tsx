@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import type { FormEvent } from "react";
-import { useAddressStore } from "@/store/useAddressStore";
+import { useAddressStore } from "@/entities/address/store/useAddressStore";
 import { useShallow } from "zustand/shallow";
 
 export const InputBox = () => {

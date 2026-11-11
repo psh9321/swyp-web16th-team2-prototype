@@ -1,6 +1,6 @@
 "use client"
 
-import { useAddressStore } from "@/store/useAddressStore";
+import { useAddressStore } from "@/entities/address/store/useAddressStore";
 import { useEffect } from "react";
 import { useShallow } from "zustand/shallow";
 

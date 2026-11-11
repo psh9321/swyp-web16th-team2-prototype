@@ -7,7 +7,7 @@ export async function API_CLIENT_ADDRESS_SEARCH(params : string) {
         })
         .json<API_CLIENT_ADDRESS_SEARCH>();
 
-        console.log(result, "##")
+        return result
     }
     catch(err) { 
         console.log(err);
