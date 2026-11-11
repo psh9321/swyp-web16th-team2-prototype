@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React + TypeScript + Vite
 
-## Getting Started
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-First, run the development server:
+Currently, two official plugins are available:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+
+Note: This will impact Vite dev & build performances.
+You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 모잇 프로토타입
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+React + TypeScript + Vite로 만든 모임 장소 결정 프로토타입입니다.
 
-## Learn More
+```bash
+pnpm install
+pnpm dev
+pnpm build
+```
 
-To learn more about Next.js, take a look at the following resources:
+카카오맵 JavaScript 키는 `.env`의 `KAKAO_API_KEY` 또는 `VITE_KAKAO_API_KEY`를 사용합니다. 카카오 개발자 콘솔의 해당 JavaScript 키에 실행 도메인(예: `http://localhost:5173`)을 등록해야 합니다. JavaScript 키만 브라우저 번들에 포함되며, REST API 키나 Admin 키를 넣으면 안 됩니다. 키는 커밋하지 않습니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 카카오 지도: 장소 핀, 혼잡도 영역, 데모 멤버 위치, 확대·축소, 선택 장소 이동
+- GPS: 사용자가 공유 스위치를 켠 경우에만 현재 위치 조회. 지도 클릭으로 핀 조정 가능
+- 추천: 장소 검색, 카테고리, 여유로운 곳 필터
+- 스페이스: 생성, 초대 링크, 이름·아바타 프로필
+- 후보지: 추가, 복수 투표·취소, 최다 득표 장소 확정·해제
+- 모바일: 지도·추천·투표 및 스페이스 패널 대응
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+혼잡도, 기존 멤버 위치, 추천과 이동 시간은 더미 데이터입니다. 서울 실시간 도시데이터 및 실시간 서버는 연결되지 않았습니다. 프로필과 스페이스별 투표·후보지·확정 장소는 localStorage에 저장되며, 다른 브라우저·기기와 동기화되지 않습니다. GPS 위치는 영구 저장하지 않습니다. 초대 링크의 스페이스 ID는 전달되지만, 서버가 없으므로 제목과 멤버는 다른 기기로 전달되지 않습니다. 지도 인증이나 네트워크 연결에 실패하면 안내와 데모 지도를 표시합니다.
 
-## Deploy on Vercel
+카카오 지도 공식 가이드: https://apis.map.kakao.com/web/guide/
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 피드백 반영: 취향에서 만남 이후까지
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **테마·분위기**: 친구와 / 데이트 / 아이와 / 기념일, 야외 / 실내 / 조용한 / 활기찬 조건을 카테고리·검색·혼잡도와 함께 조합합니다. 선택한 조건을 모두 만족하는 장소를 표시합니다.
+- **현장 소식**: 전체 또는 선택 장소의 방문 팁·분위기·웨이팅 제보를 확인하고 작성할 수 있습니다. 대기 시간은 선택 입력이며, 샘플 글과 직접 작성한 글을 구분합니다. 글은 스페이스별로 현재 브라우저에 저장됩니다.
+- **만남 이후 코스**: 선택 장소에서 시작하는 대기 적은 코스 / 팝업 구경 / 실내 코스를 제공합니다. 체류·도보·대기를 합산한 전체 시간을 표시하고 카카오 지도에 순서와 직선 동선을 표시합니다. 원하는 코스를 스페이스에 담고 다시 열거나 뺄 수 있습니다.
+
+주변 매장과 팝업은 가상의 기획 예시입니다. 실제 영업·행사·실내 혼잡도·웨이팅·길찾기 API를 사용하지 않습니다. 지도 동선은 도보 경로가 아닌 직선입니다. 현장 제보는 실시간 동기화나 검증을 하지 않습니다.
+
+Node.js 24 환경에서 핵심 조건 조합·코스 시간 합산·장소 연결 검증:
+
+```bash
+node --test tests/experience.test.ts
+```
