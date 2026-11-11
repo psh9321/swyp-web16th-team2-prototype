@@ -9,8 +9,6 @@ pnpm dev
 pnpm build
 ```
 
-카카오맵은 실제 Kakao Maps JavaScript SDK를 사용합니다. `.env`에 `VITE_KAKAO_MAP_JAVASCRIPT_KEY` (`NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY` 또는 `KAKAO_JAVASCRIPT_KEY`)를 설정한 뒤 개발 서버를 재시작하세요. 카카오 개발자 콘솔의 해당 JavaScript 키에 실행 도메인(예: `http://localhost:5173`)을 등록해야 합니다. `KAKAO_API_KEY`는 REST API용이므로 브라우저에 포함하거나 지도 SDK에 사용하지 않습니다. JavaScript 키만 브라우저 번들에 포함됩니다.
-
 - 카카오 지도: 장소 핀, 혼잡도 영역, 데모 멤버 위치, 확대·축소, 선택 장소 이동
 - GPS: 사용자가 공유 스위치를 켠 경우에만 현재 위치 조회. 지도 클릭으로 핀 조정 가능
 - 추천: 장소 검색, 카테고리, 여유로운 곳 필터
